@@ -89,6 +89,13 @@
         loadStudents();
       });
 
+      // Form Submit 이벤트 처리하기
+      studentForm.addEventListener("submit", function(event) {
+        // 기본으로 설정된 Event가 동작하지 않도록 하기 위함함
+        event.preventDefault();
+        console.log("Form 제출 되었음...");
+      });
+
       // 학생목록 로드하는 함수
       function loadStudents() {
         console.log("학생 목록 로드중...");
