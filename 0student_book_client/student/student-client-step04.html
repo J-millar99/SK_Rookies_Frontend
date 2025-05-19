@@ -86,13 +86,13 @@
       const studentTableBody = document.getElementById("studentTableBody");
 
       //Document Load 이벤트 처리하기
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function () { // 화면이 뜨자마자 처리해주는 이벤트
         loadStudents();
       });
 
       //Form Submit 이벤트 처리하기
       studentForm.addEventListener("submit", function (event) {
-        //기본으로 설정된 Event가 동작하지 않도록 하기 위함
+        // 해당 이벤트의 기본 동작을 취소하는 역할 : 입력 폼을 확인하고 제출하기 위함
         event.preventDefault();
         console.log("Form 제출 되었음...");
 

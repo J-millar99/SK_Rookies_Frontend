@@ -72,7 +72,7 @@ function validateStudent(student) {// 필수 필드 검사
     //const studentNumberPattern = /^[A-Za-z0-9]+$/;
     const studentNumberPattern = /^s\d{5}$/;
     if (!studentNumberPattern.test(student.studentNumber)) {
-        alert("학번은 영문과 숫자만 입력 가능합니다.");
+        alert("학번은 영문과 숫자만 입력 가능합니다. (s로시작하고 숫자는 5자리)");
         return false;
     }
 
