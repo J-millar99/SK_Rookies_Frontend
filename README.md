@@ -45,4 +45,4 @@
 * step9
     * - student 수정하기 전에 데이터 조회 먼저하기
     * - GET api/students/1 student 조회하는 editStudent() 함수 구현
-    * - 수정, 삭제 버튼의 스타일 추가하기기
+    * - 수정, 삭제 버튼의 스타일 추가하기
