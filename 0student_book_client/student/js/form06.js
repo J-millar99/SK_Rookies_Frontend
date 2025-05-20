@@ -103,15 +103,48 @@ function loadStudents() {
     console.log("학생 목록 로드 중.....");
     // fetch : 서버로 HTTP 요청을 보내는 내장 함수, 자동으로 Promise를 반환
     fetch(`${API_BASE_URL}/api/students`) // Promise
-        .then(response => {
+        .then(response => { // response는 Promise<response>
             if (!response.ok)
                 throw new Error("학생 목록을 불러오는데 실패했습니다.");
-            return response.json
+            return response.json();
         })
-        .then(student => renderStudentTable(student))
-        .catch();
+        .then(student => renderStudentTable(student)) // student는 json 데이터
+        .catch(error => {
+            console.log("Error: " + error);
+            alert("학생 목록을 불러오는데 실패했습니다.");
+        });
 }
 
-function renderStudentTable(student) {
+function renderStudentTable(students) {
+    console.log(students);
+    studentTableBody.innerHTML = "";
 
+    students.forEach((student) => {
+        //<tr> 엘리먼트를 생성하기
+        const row = document.createElement("tr");
+
+        /*
+         * ? : 옵셔널 체이닝 : null 혹은 undefined가 아닌 존재하는 필드면, 반환하고 없으면 undefined
+         * ?? : 널 병합 연산자 : 좌측 값이 null 혹은 undefined이면 우측 값을 반환
+         * || : 논리 OR 연산자 : 좌측 값이 truthy이면 그 값을 반환하고 아니면 오른쪽 값을 반환
+         * false, 0, "" (빈 문자열), null, undefined, NaN은 모두 falsy
+        */
+        
+        //<tr>의 content을 동적으로 생성
+        row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>${student.studentNumber}</td>
+                    <td>${student.detail ? student.detail.address : "-"}</td>
+                    <td>${student.detail ? student.detail.phoneNumber : "-"}</td>
+                    //  <td>${student.detail ? student.detail.email || "-" : "-"}</td>
+                    <td>${student.detail?.email ?? "-"}</td>
+                    <td>${student.detail ? student.detail.dateOfBirth || "-" : "-"}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editStudent(${student.id})">수정</button>
+                        <button class="delete-btn" onclick="deleteStudent(${student.id})">삭제</button>
+                    </td>
+                `;
+        //<tbody>의 아래에 <tr>을 추가시켜 준다.
+        studentTableBody.appendChild(row);
+    });
 }
