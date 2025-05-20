@@ -24,7 +24,7 @@ bookForm.addEventListener("submit", function (event) {
         isbn: formData.get('isbn').trim(),
         price: formData.get('price') ? parseInt(formData.get('price')) : null,
         publishData: formData.get('publishDate') || null,
-        detailRequest: {
+        bookDetail: {
             description: formData.get('description').trim() || null,
             language: formData.get('language').trim() || null,
             pageCount: formData.get('pageCount') ? parseInt(formData.get('pageCount')) : null,
@@ -59,7 +59,7 @@ function validateBook(book) {
   }
 
   if (!book.price) {
-    alert("가격을을 입력해주세요.");
+    alert("가격을 입력해주세요.");
     return false;
   }
 
